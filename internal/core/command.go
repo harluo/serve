@@ -18,8 +18,10 @@ type Command struct {
 	exiting bool
 }
 
-func newCommand(logger log.Logger) boot.Command {
+func newCommand(logger log.Logger) *Command {
 	return &Command{
+		servers: make([]kernel.Server, 0),
+
 		logger: logger,
 	}
 }
@@ -32,15 +34,15 @@ func (c *Command) Add(required kernel.Server, optionals ...kernel.Server) (comma
 	return
 }
 
-func (c *Command) Aliases() []string {
-	return []string{
-		"c",
-		"srv",
-	}
-}
-
 func (c *Command) Name() string {
 	return "serve"
+}
+
+func (c *Command) Aliases() []string {
+	return []string{
+		"s",
+		"srv",
+	}
 }
 
 func (c *Command) Usage() string {
