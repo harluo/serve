@@ -7,6 +7,7 @@ import (
 
 	"github.com/goexl/gox/field"
 	"github.com/goexl/log"
+	"github.com/harluo/serve/internal/core/internal"
 	"github.com/harluo/serve/internal/kernel"
 )
 
@@ -74,23 +75,27 @@ func (c *Command) Stop(ctx context.Context) (err error) {
 }
 
 func (c *Command) Before(ctx context.Context) (err error) {
-	/*for _, server := range c.servers {
-		err = server.Before(ctx)
+	for _, server := range c.servers {
+		if converted, ok := server.(internal.Before); ok {
+			err = converted.Before(ctx)
+		}
 		if nil != err {
 			break
 		}
-	}*/
+	}
 
 	return
 }
 
 func (c *Command) After(ctx context.Context) (err error) {
-	/*for _, server := range c.servers {
-		err = server.After(ctx)
+	for _, server := range c.servers {
+		if converted, ok := server.(internal.After); ok {
+			err = converted.After(ctx)
+		}
 		if nil != err {
 			break
 		}
-	}*/
+	}
 
 	return
 }
