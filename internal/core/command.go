@@ -7,7 +7,6 @@ import (
 
 	"github.com/goexl/gox/field"
 	"github.com/goexl/log"
-	"github.com/harluo/boot"
 	"github.com/harluo/serve/internal/kernel"
 )
 
@@ -26,10 +25,9 @@ func newCommand(logger log.Logger) *Command {
 	}
 }
 
-func (c *Command) Add(required kernel.Server, optionals ...kernel.Server) (command *Command) {
+func (c *Command) Serve(required kernel.Server, optionals ...kernel.Server) (err error) { // 返回错误是为了方便调用，其实无意义
 	c.servers = append(c.servers, required)
 	c.servers = append(c.servers, optionals...)
-	command = c
 
 	return
 }
@@ -97,20 +95,8 @@ func (c *Command) After(ctx context.Context) (err error) {
 	return
 }
 
-func (c *Command) Arguments() boot.Arguments {
-	return boot.Arguments{}
-}
-
-func (c *Command) Subcommands() boot.Commands {
-	return boot.Commands{}
-}
-
 func (c *Command) Description() string {
-	return ""
-}
-
-func (c *Command) Category() string {
-	return ""
+	return `提供一个长期运行的服务`
 }
 
 func (c *Command) start(ctx context.Context, count int) (err error) {
