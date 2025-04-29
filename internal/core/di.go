@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	di.New().Get().Dependency().Puts(
+	di.New().Instance().Put(
 		newCommand,
 		func(command *Command) internal.Put {
 			return internal.Put{
