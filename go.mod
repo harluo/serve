@@ -5,7 +5,7 @@ go 1.24
 require (
 	github.com/goexl/gfx v0.2.8 // indirect
 	github.com/goexl/gox v1.9.2
-	github.com/harluo/config v0.0.2 // indirect
+	github.com/harluo/config v0.0.4 // indirect
 	github.com/harluo/di v0.0.5
 	github.com/urfave/cli/v2 v2.27.6 // indirect
 	golang.org/x/sys v0.32.0 // indirect
@@ -14,7 +14,7 @@ require (
 
 require (
 	github.com/goexl/log v0.0.9
-	github.com/harluo/boot v1.6.7
+	github.com/harluo/boot v1.7.1
 )
 
 require (
