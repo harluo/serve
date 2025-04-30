@@ -10,7 +10,7 @@ require (
 
 require (
 	github.com/goexl/log v0.0.9
-	github.com/harluo/boot v1.7.1
+	github.com/harluo/boot v1.7.2
 )
 
 require (
