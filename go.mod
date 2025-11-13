@@ -1,6 +1,6 @@
 module github.com/harluo/serve
 
-go 1.24
+go 1.25
 
 require (
 	github.com/goexl/gox v1.9.2
@@ -10,7 +10,7 @@ require (
 
 require (
 	github.com/goexl/log v0.1.0
-	github.com/harluo/boot v1.7.4
+	github.com/harluo/boot v1.7.6
 )
 
 require (
@@ -22,7 +22,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/olekukonko/errors v1.1.0 // indirect
 	github.com/olekukonko/ll v0.0.9 // indirect
-	github.com/olekukonko/tablewriter v1.0.8 // indirect
+	github.com/olekukonko/tablewriter v1.1.0 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20250705151800-55b8f293f342 // indirect
