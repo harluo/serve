@@ -5,6 +5,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/goexl/gox"
 	"github.com/goexl/gox/field"
 	"github.com/goexl/log"
 	"github.com/harluo/serve/internal/core/internal"
@@ -120,7 +121,7 @@ func (c *Command) start(ctx context.Context, count int) (err error) {
 func (c *Command) startServer(ctx context.Context, server kernel.Server, wg *sync.WaitGroup, err *error) {
 	defer wg.Done()
 
-	c.logger.Info("启动服务成功", field.New[string]("name", server.Name()))
+	c.logger.Info("开始启动服务", field.New("name", server.Name()), c.fields(server)...)
 	// 记录时间，如果发生错误的时间小于500毫秒，就是执行错误，应该立即退出；如果大于，则只记录日志
 	now := time.Now()
 	if se := server.Start(ctx); nil != se && !c.exiting {
@@ -135,10 +136,20 @@ func (c *Command) startServer(ctx context.Context, server kernel.Server, wg *syn
 
 func (c *Command) stopServer(ctx context.Context, server kernel.Server, wg *sync.WaitGroup, err *error) {
 	defer wg.Done()
+
+	c.logger.Info("开始停止服务", field.New("name", server.Name()), c.fields(server)...)
 	if se := server.Stop(ctx); nil != se {
 		*err = se
 		c.logger.Info("停止服务出错", field.New("name", server.Name()), field.Error(se))
 	} else {
 		c.logger.Info("停止服务成功", field.New("name", server.Name()))
 	}
+}
+
+func (c *Command) fields(server kernel.Server) (fields []gox.Field[any]) {
+	if converted, ok := server.(internal.Fields); ok {
+		fields = converted.Fields()
+	}
+
+	return
 }
